@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.come.mapper.FlyMapper">
+
+    <resultMap id="flyMap" type="org.come.entity.Fly">
+        <id column="fid" property="fid"/>
+        <result column="fly_id" property="flyId"/>
+        <result column="stairs" property="stairs"/>
+        <result column="skin" property="skin"/>
+        <result column="exp" property="exp"/>
+        <result column="fuel" property="fuel"/>
+    </resultMap>
+
+    <resultMap id="flyMapAll" type="org.come.entity.Fly">
+        <id column="fid" property="fid"/>
+        <result column="fly_id" property="flyId"/>
+        <result column="fly_level" property="flyLevel"/>
+        <result column="fly_speed" property="flySpeed"/>
+        <result column="fly_type" property="flyType"/>
+        <result column="curr_fly_level" property="currFlyLevel"/>
+        <result column="curr_ldz" property="currLdz"/>
+    </resultMap>
+
+    <insert id="saveBatch" parameterType="org.come.entity.Fly" useGeneratedKeys="false">
+        INSERT INTO FLY ("fly_id", "stairs", "name", "skin", "skill", "text", "fly_speed", "fly_level",
+        "curr_fly_level", "fly_type", "ldz", "curr_ldz", "exp", "fuel", "fid", "roleid")
+        VALUES (
+        #{flyId},
+        #{stairs},
+        #{name},
+        #{skin},
+        #{skill},
+        #{text},
+        #{flySpeed},
+        #{flyLevel},
+        #{currFlyLevel},
+        #{flyType},
+        #{ldz},
+        #{currLdz},
+        #{exp},
+        #{fuel},
+        #{fid},
+        #{roleid});
+        <foreach collection="list" item="item" separator="union all">
+            select
+            #{item.fid},#{item.flyId},#{item.stairs},#{item.name},#{item.skin},
+            #{item.skill},#{item.text},#{item.flySpeed},#{item.flyLevel},#{item.currFlyLevel},#{item.flyType},
+            #{item.ldz}, #{currLdz},#{item.exp},#{item.fuel},#{item.roleid} from dual
+        </foreach>
+    </insert>
+    <select id="selectAllFlys" resultMap="flyMapAll">
+        select *
+        from FLY
+    </select>
+
+    <select id="selectFlysByRoleID" parameterType="java.math.BigDecimal"
+            resultType="org.come.entity.Fly">
+        select *
+        from FLY
+        where roleid = #{ roleid }
+        order by fid
+    </select>
+
+    <select id="selectFlyByRoleIDAndFid" parameterType="org.come.entity.Fly"
+            resultType="org.come.entity.Fly">
+        select *
+        from FLY
+        where roleid = #{ roleid }
+          and fid = #{fid}
+    </select>
+
+    <select id="selectFlysByFid" parameterType="java.math.BigDecimal"
+            resultType="org.come.entity.Fly">
+        select *
+        from FLY
+        where fid = #{fid}
+    </select>
+
+    <delete id="deleteFlysByFid" parameterType="java.math.BigDecimal">
+        delete
+        from Fly
+        where fid = #{fid}
+    </delete>
+
+
+    <!-- 修改飞行器信息 -->
+    <update id="updateFly" parameterType="org.come.entity.Fly">
+        UPDATE FLY
+        SET "fly_id"         = #{fly.flyId},
+            "stairs"         = #{fly.stairs},
+            "name"           = #{fly.name},
+            "skin"           = #{fly.skin},
+            "skill"          = #{fly.skill},
+            "text"           = #{fly.text},
+            "fly_speed"      = #{fly.flySpeed},
+            "fly_level"      = #{fly.flyLevel},
+            "curr_fly_level" = #{fly.currFlyLevel},
+            "fly_type"       = #{fly.flyType},
+            "ldz"            = #{fly.ldz},
+            "curr_ldz"       = #{fly.currLdz},
+            "exp"            = #{fly.exp},
+            "fuel"           = #{fly.fuel},
+            "fid"            = #{fly.fid},
+            "roleid"         = #{fly.roleid}
+        WHERE "fid" = #{fly.fid}
+    </update>
+
+
+    <insert id="insertFlyToSql" parameterType="org.come.entity.Fly">
+        INSERT INTO FLY ("fly_id", "stairs", "name", "skin", "skill", "text", "fly_speed", "fly_level",
+                         "curr_fly_level", "fly_type", "ldz", "curr_ldz", "exp", "fuel", "fid", "roleid")
+        VALUES (#{flyId}, #{stairs}, #{name}, #{skin}, #{skill}, #{text}, #{flySpeed}, #{flyLevel},
+                #{currFlyLevel}, #{flyType}, #{ldz}, #{currLdz}, #{exp}, #{fuel}, #{fid}, #{roleid})
+    </insert>
+
+
+    <select id="selectFlyCount" parameterType="java.math.BigDecimal" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM Fly
+        WHERE roleid = #{roleid}
+    </select>
+
+    <!-- 批量删除 -->
+    <delete id="deleteFlysByFidList" parameterType="java.util.List">
+        delete from
+        FLY
+        where fid in
+        <foreach collection="list" close=")" item="fid" open="("
+                 separator=",">
+            #{fid}
+        </foreach>
+    </delete>
+
+    <!-- 批量添加 -->
+    <insert id="insertFlyList" parameterType="java.util.List">
+        INSERT INTO FLY ("fly_id", "stairs", "name", "skin", "skill", "text", "fly_speed", "fly_level",
+        "curr_fly_level", "fly_type", "ldz", "curr_ldz", "exp", "fuel", "fid", "roleid")
+        VALUES (#{flyId},
+        #{stairs},
+        #{name},
+        #{skin},
+        #{skill},
+        #{text},
+        #{flySpeed},
+        #{flyLevel},
+        #{currFlyLevel},
+        #{flyType},
+        #{ldz},
+        #{currLdz},
+        #{exp},
+        #{fuel},
+        #{fid},
+        #{roleid})
+        <foreach collection="list" item="item" separator="union all">
+            select
+            #{item.item.fid},#{item.flyId},#{item.stairs},#{item.name},#{item.skin},
+            #{item.skill},#{item.text},#{item.flySpeed},#{item.flyLevel},#{item.currFlyLevel},#{item.flyType},
+            #{item.ldz}, #{currLdz},#{item.exp},#{item.fuel},#{item.roleid} form dual
+        </foreach>
+    </insert>
+
+
+    <!-- 修改飞行器信息 -->
+    <update id="updateFlyList" parameterType="java.util.List">
+        UPDATE FLY
+        <trim prefix="set" prefixOverrides=",">
+            <trim prefix="stairs =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.stairs}
+                </foreach>
+            </trim>
+            <trim prefix="stairs =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.stairs}
+                </foreach>
+            </trim>
+            <trim prefix="name =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.name}
+                </foreach>
+            </trim>
+            <trim prefix="skin =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.skin}
+                </foreach>
+            </trim>
+            <trim prefix="skill =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.skill}
+                </foreach>
+            </trim>
+            <trim prefix="text =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.text}
+                </foreach>
+            </trim>
+            <trim prefix="fly_speed =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.fly_speed}
+                </foreach>
+            </trim>
+            <trim prefix="fly_level =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.fly_level}
+                </foreach>
+            </trim>
+            <trim prefix="curr_fly_level =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.curr_fly_level}
+                </foreach>
+            </trim>
+            <trim prefix="fly_type =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.fly_type}
+                </foreach>
+            </trim>
+            <trim prefix="ldz =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.ldz}
+                </foreach>
+            </trim>
+            <trim prefix="curr_ldz =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.curr_ldz}
+                </foreach>
+            </trim>
+            <trim prefix="exp=case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.exp}
+                </foreach>
+            </trim>
+            <trim prefix="fuel =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.fuel}
+                </foreach>
+            </trim>
+            <trim prefix="roleid =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.roleid}
+                </foreach>
+            </trim>
+            <trim prefix="fid =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when fid = #{fid} then
+                    #{item.fid}
+                </foreach>
+            </trim>
+        </trim>
+        WHERE
+        <foreach collection="list" item="item" separator="or">
+            fid=#{item.fid}
+        </foreach>
+    </update>
+
+</mapper>

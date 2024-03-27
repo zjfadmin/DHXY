@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.come.mapper.TtModelMapper">
+
+    <update id="updateTtConfig" parameterType="org.come.bean.TtModel">
+        UPDATE TTMODEL
+        SET
+            STARTHOUR=#{startHour},
+            ENDHOUR=#{endHour},
+            STARTMINUTE=#{startMinute},
+            ENDMINUTE=#{endMinute},
+            SEASONSTARTTIME=#{seasonStartTime},
+            SEASONENDTIME=#{seasonEndTime},
+            CURRENTSEASON=#{currentSeason},
+            ISOPEN=#{isOpen}
+    </update>
+
+
+    <select id="getTtConfig" resultType="org.come.bean.TtModel">
+        SELECT * FROM TTMODEL
+    </select>
+</mapper>

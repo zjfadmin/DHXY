@@ -1,0 +1,14 @@
+{
+  "ltr":1,
+  "ltrUpgradeMultiplier":3,
+  "ldzList":[100,500,1000,2000,4000],
+  "initLdz":20,
+  "integerList":[1,16,32,48,64],
+  "initLevelUpExperience":1000,
+  "initLevelUpMoney":100000,
+  "upgradeIncrementRate":1,
+  "upgradeIncrementNumber":1000,
+  "upgradeIncrementMoney":9999,
+  "isType":1 ,
+  "flySpeed":[0.36,0.34,0.32,0.30,0.28]
+}

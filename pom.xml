@@ -1,0 +1,766 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>GameServer</groupId>
+  <artifactId>GameServer</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>GameServer</name>
+  <description/>
+    <properties> 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Spring版本号 -->
+		<spring.version>4.3.8.RELEASE</spring.version>
+    </properties>  
+  <dependencies>
+    <!--  jwt 后端用户登录 token 生成 -->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.4.0</version>
+	</dependency>
+	
+    <dependency>  
+	  <groupId>com.github.xkzhangsan</groupId>    
+	  <artifactId>xk-time</artifactId>       
+	  <version>3.2.3</version>    
+	</dependency>  
+    
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient 
+			微信支付开始 -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.github.wxpay</groupId>
+			<artifactId>wxpay-sdk</artifactId>
+			<version>0.0.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.11.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.4</version>
+		</dependency>
+	 <!--<!  <dependency>
+		  <groupId>cn.hutool</groupId>
+		  <artifactId>core</artifactId>
+	  </dependency> 
+	  -->
+	  <dependency>
+		<groupId>cn.hutool</groupId>
+		  <artifactId>hutool-all</artifactId>
+		  <version>5.7.5</version>
+	  </dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.39</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<!-- 单元测试的jar包 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<!--<scope>test</scope> -->
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.glassfish/javax.json -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+		<!-- 微信支付包结束 -->
+	  <dependency>
+		  <groupId>com.google.guava</groupId>
+		  <artifactId>guava</artifactId>
+		  <version>20.0</version>
+	  </dependency>
+
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax</groupId> -->
+<!-- 			<artifactId>javaee-api</artifactId> -->
+<!-- 			<version>7.0</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>javax.servlet.jsp.jstl</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- Spring相关包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- AOP相关包 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+
+		<!-- MyBatis相关包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.miemiedev</groupId>
+			<artifactId>mybatis-paginator</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+<!-- 		<dependency> -->
+		
+<!-- 			<groupId>com.github.pagehelper</groupId> -->
+<!-- 			<artifactId>pagehelper</artifactId> -->
+<!-- 			<version>3.2.1-prex</version> -->
+<!-- 		</dependency> -->
+		<!-- <dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>3.4.2-fix</version>
+		</dependency> -->
+		<!-- MySQL相关包 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.26</version>
+		</dependency>
+		
+	<!-- 	 <dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.1.0</version>
+		</dependency>  --> 
+<!-- 	 <dependency> -->
+<!--             <groupId>com.oracle</groupId> -->
+<!--             <artifactId>ojdbc8</artifactId> -->
+<!--             <version>12.2.0.1</version> -->
+<!--      </dependency> -->
+	<dependency>
+            <groupId>com</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>12</version>
+     </dependency>
+		<!-- 数据库连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.20</version>
+			<exclusions>
+			 <exclusion>
+			  <groupId>com.alibaba</groupId>
+			  <artifactId>jconsole</artifactId>
+			 </exclusion>
+			 <exclusion>
+			   <groupId>com.alibaba</groupId>
+			   <artifactId>tools</artifactId>
+			 </exclusion>
+			</exclusions>
+		</dependency> 
+
+		<!-- Spring集成MyBatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<!-- JSP标准标签库 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- JSP报错导入包 -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.servlet</groupId> -->
+<!-- 			<artifactId>javax.servlet-api</artifactId> -->
+<!-- 			<version>3.1.0</version> -->
+<!-- 		</dependency> -->
+		 <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+		<!-- 日志相关包 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+		<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- 单元测试相关包 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.10</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		<!-- alipay -->
+	<!-- 	<dependency>
+			<groupId>com.alipay.sdk</groupId>
+			<artifactId>alipay-sdk-java</artifactId>
+			<version>3.3.49.ALL</version>
+		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.alipay</groupId> -->
+		<!-- <artifactId>sdk-java</artifactId> -->
+		<!-- <version>20170307171631</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.alipay.resource</groupId> -->
+		<!-- <artifactId>sdk-java</artifactId> -->
+		<!-- <version>20170307171632</version> -->
+		<!-- </dependency> -->
+
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<!-- ↓↓↓↓↓↓↓↓ 支付相关 ↓↓↓↓↓↓↓↓ -->
+		<!-- http -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<!-- xml处理 -->
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<!-- fast-json包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.39</version>
+		</dependency>
+		<!-- ↑↑↑↑↑↑↑↑ 支付相关 ↑↑↑↑↑↑↑↑ -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
+      
+       <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+       
+       	<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.19.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+       
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.0.1</version>
+</dependency>
+   <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<dependency>
+	<groupId>commons-fileupload</groupId>
+	<artifactId>commons-fileupload</artifactId>
+	<version>1.2.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+	<groupId>commons-io</groupId>
+	<artifactId>commons-io</artifactId>
+	<version>2.2</version>
+</dependency>
+
+<!-- quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- HGC添加jar（对象生成Excel）start 
+                <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.14-beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.14-beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.14-beta1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+	<dependency>
+		<groupId>net.sourceforge.jexcelapi</groupId>
+		<artifactId>jxl</artifactId>
+		<version>2.6.12</version>
+	</dependency>-->
+        <!-- HGC添加jar（对象生成Excel）end -->
+        
+        <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper</artifactId>
+    <version>4.2.1</version>
+
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
+<dependency>
+<groupId>net.sourceforge.jexcelapi</groupId>
+<artifactId>jxl</artifactId>
+<version>2.6.10</version>
+</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.dom4j/dom4j -->
+		<dependency>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+</dependencies>
+  <build>
+	  <finalName>GameServer</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+      
+	   <plugin>
+	    <groupId>org.apache.tomcat.maven</groupId>
+	    <artifactId>tomcat7-maven-plugin</artifactId>
+	    <version>2.2</version>
+	    <configuration>
+	     <port>8091</port>
+	     <path>/</path>
+	    </configuration>
+	   </plugin>
+      
+           <!-- proguard混淆插件-->
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <executions>
+                    <execution>
+                        <!-- 打包的时候开始混淆-->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <injar>${project.build.finalName}.jar</injar>
+                    <!--输出的jar-->
+                    <outjar>${project.build.finalName}.jar</outjar>
+                    <!-- 是否混淆-->
+                    <obfuscate>true</obfuscate>
+                    <options>
+                        <option>-target 1.8</option> <!--指定java版本号-->
+                        <option>-dontshrink</option> <!--默认开启，不做收缩（删除注释、未被引用代码）-->
+                        <option>-dontoptimize</option><!--默认是开启的，这里关闭字节码级别的优化-->
+                        <option>-adaptclassstrings</option><!--混淆类名之后，对使用Class.forName('className')之类的地方进行相应替代-->
+                        <option>-ignorewarnings
+                        </option><!-- 忽略warn消息,如果提示org.apache.http.* 这个包里的类有问题，那么就加入下述代码：-keep class org.apache.http.** { *; }    -dontwarn org.apache.http.**-->
+                        <option>-keep class org.apache.logging.log4j.util.* { *; }</option>
+                        <option>-dontwarn org.apache.logging.log4j.util.**</option>
+                        <option>-keepattributes
+                            Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+                        </option><!--对异常、注解信息在runtime予以保留，不然影响springboot启动-->
+                        <!--不混淆所有interface接口-->
+                        <option>-keepnames interface **</option>
+                        <option>-keepclassmembers enum * { *; }</option><!--保留枚举成员及方法-->
+                        <option>-keepparameternames</option>
+                        <option>-keepclasseswithmembers public class * {
+                            public static void main(java.lang.String[]);}
+                        </option> <!--保留main方法的类及其方法名-->
+                        <!--忽略note消息，如果提示javax.annotation有问题，那麽就加入以下代码-->
+                        <option>-dontnote javax.annotation.**</option>
+                        <option>-dontnote sun.applet.**</option>
+                        <option>-dontnote sun.tools.jar.**</option>
+                        <option>-dontnote org.apache.commons.logging.**</option>
+                        <option>-dontnote javax.inject.**</option>
+                        <option>-dontnote org.aopalliance.intercept.**</option>
+                        <option>-dontnote org.aopalliance.aop.**</option>
+                        <option>-dontnote org.apache.logging.log4j.**</option>
+
+                        <!--  ##### 以下为需要根据项目情况修改  ##### -->
+                        <option>-keep class **.action.** {*;}</option>
+                        <option>-keep class **.entity.* {*;}</option>
+                        <option>-keep class **.model.* {*;}</option>
+                        <option>-keep class **.controller.* {*;}</option>
+                        <option>-keep class **.controller.* {*;}</option>
+                        <!--  ##### 以上为需要根据项目情况修改  comment by 郭秀志 20200719 ##### -->
+
+                        <option>-keep interface * extends * { *; }</option>
+                        <!--不混淆所有类,保存原始定义的注释-->
+                        <option>-keepclassmembers class * {
+                            @org.springframework.beans.factory.annotation.Autowired *;
+                            @org.springframework.beans.factory.annotation.Value *;
+                            }
+                        </option>
+                    </options>
+                    <libs>
+                        <!-- 添加依赖 java8-->
+                        <lib>${java.home}/lib/rt.jar</lib>
+                        <lib>${java.home}/lib/jce.jar</lib>
+                    </libs>
+                </configuration>
+                <dependencies>
+                    <!-- https://mvnrepository.com/artifact/net.sf.proguard/proguard-base -->
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>6.1.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>  
+      
+       <!-- proguard混淆插件-->
+<!--             <plugin> -->
+<!--                 <groupId>com.github.wvengen</groupId> -->
+<!--                 <artifactId>proguard-maven-plugin</artifactId> -->
+<!--                 <version>2.2.0</version> -->
+<!--                 <executions> -->
+<!--                     <execution> -->
+<!--                         <phase>package</phase> -->
+<!--                         <goals> -->
+<!--                             <goal>proguard</goal> -->
+<!--                         </goals> -->
+<!--                     </execution> -->
+<!--                 </executions> -->
+<!--                 <configuration> -->
+<!--                     <injar>${project.build.finalName}.war</injar> -->
+<!--                     <outjar>${project.build.finalName}.jar</outjar> -->
+<!--                     <obfuscate>true</obfuscate> -->
+<!--                     <options> -->
+<!--                         <option>-target 1.8</option> -->
+<!--                         <option>-dontshrink</option> -->
+<!--                         <option>-dontoptimize</option> -->
+<!--                         <option>-adaptclassstrings</option> -->
+<!--                         <option>-ignorewarnings -->
+<!--                         </option> -->
+<!--                         <option>-keep class org.apache.logging.log4j.util.* { *; }</option> -->
+<!--                         <option>-dontwarn org.apache.logging.log4j.util.**</option> -->
+<!--                         <option>-keepattributes -->
+<!--                             Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod -->
+<!--                         </option> -->
+<!--                         <option>-keepnames interface **</option> -->
+<!--                         <option>-keepclassmembers enum * { *; }</option> -->
+<!--                         &lt;!&ndash;保留枚举成员及方法&ndash;&gt; -->
+<!--                         <option>-keepparameternames</option> -->
+<!--                         <option>-keepclasseswithmembers public class * { -->
+<!--                             public static void main(java.lang.String[]);} -->
+<!--                         </option>  -->
+<!--                         &lt;!&ndash;保留main方法的类及其方法名&ndash;&gt; -->
+<!--                         &lt;!&ndash;忽略note消息，如果提示javax.annotation有问题，那麽就加入以下代码&ndash;&gt; -->
+<!--                         <option>-dontnote javax.annotation.**</option> -->
+<!--                         <option>-dontnote sun.applet.**</option> -->
+<!--                         <option>-dontnote sun.tools.jar.**</option> -->
+<!--                         <option>-dontnote org.apache.commons.logging.**</option> -->
+<!--                         <option>-dontnote javax.inject.**</option> -->
+<!--                         <option>-dontnote org.aopalliance.intercept.**</option> -->
+<!--                         <option>-dontnote org.aopalliance.aop.**</option> -->
+<!--                         <option>-dontnote org.apache.logging.log4j.**</option> -->
+
+<!--                         &lt;!&ndash;  ##### 以下为需要根据项目情况修改  ##### &ndash;&gt; -->
+<!--                         <option>-keep class **.action.** {*;}</option> -->
+<!--                         <option>-keep class **.entity.* {*;}</option> -->
+<!--                         <option>-keep class **.model.* {*;}</option> -->
+<!--                         <option>-keep class **.controller.* {*;}</option> -->
+<!--                         <option>-keep class **.controller.* {*;}</option> -->
+<!--                         &lt;!&ndash;  ##### 以上为需要根据项目情况修改  comment by 郭秀志 20200719 ##### &ndash;&gt; -->
+
+<!--                         <option>-keep interface * extends * { *; }</option> -->
+<!--                         &lt;!&ndash;不混淆所有类,保存原始定义的注释&ndash;&gt; -->
+<!--                         <option>-keepclassmembers class * { -->
+<!--                             @org.springframework.beans.factory.annotation.Autowired *; -->
+<!--                             @org.springframework.beans.factory.annotation.Value *; -->
+<!--                             } -->
+<!--                         </option> -->
+<!--                     </options> -->
+<!--                     <libs> -->
+<!--                         <lib>${java.home}/lib/rt.jar</lib> -->
+<!--                         <lib>${java.home}/lib/jce.jar</lib> -->
+<!--                     </libs> -->
+<!--                 </configuration> -->
+<!--                 <dependencies> -->
+<!--                     <dependency> -->
+<!--                         <groupId>net.sf.proguard</groupId> -->
+<!--                         <artifactId>proguard-base</artifactId> -->
+<!--                         <version>6.1.1</version> -->
+<!--                     </dependency> -->
+<!--                 </dependencies> -->
+<!--             </plugin> -->
+            <!-- Copying Allatori configuration file to 'target' directory.
+           The destination file will be filtered (Maven properties used in configuration file will be resolved). -->
+<!--       <plugin> -->
+<!--         <groupId>org.apache.maven.plugins</groupId> -->
+<!--         <artifactId>maven-resources-plugin</artifactId> -->
+<!--         <version>2.6</version> -->
+<!--         <executions> -->
+<!--           <execution> -->
+<!--             <id>copy-and-filter-allatori-config</id> -->
+<!--             <phase>package</phase> -->
+<!--             <goals> -->
+<!--               <goal>copy-resources</goal> -->
+<!--             </goals> -->
+<!--             <configuration> -->
+<!--               <outputDirectory>${basedir}/target</outputDirectory> -->
+<!--               <resources> -->
+<!--                 <resource> -->
+<!--                   <directory>${basedir}/allatori</directory> -->
+<!--                   <includes> -->
+<!--                     <include>allatori.xml</include> -->
+<!--                   </includes> -->
+<!--                   <filtering>true</filtering> -->
+<!--                 </resource> -->
+<!--               </resources> -->
+<!--             </configuration> -->
+<!--           </execution> -->
+<!--         </executions> -->
+<!--       </plugin> -->
+
+<!--       Running Allatori -->
+<!--       <plugin> -->
+<!--         <groupId>org.codehaus.mojo</groupId> -->
+<!--         <artifactId>exec-maven-plugin</artifactId> -->
+<!--         <version>1.2.1</version> -->
+<!--         <executions> -->
+<!--           <execution> -->
+<!--             <id>run-allatori</id> -->
+<!--             <phase>package</phase> -->
+<!--             <goals> -->
+<!--               <goal>exec</goal> -->
+<!--             </goals> -->
+<!--           </execution> -->
+<!--         </executions> -->
+<!--         <configuration> -->
+<!--           <executable>java</executable> -->
+<!--           <arguments> -->
+<!--             <argument>-Xms128m</argument> -->
+<!--             <argument>-Xmx512m</argument> -->
+<!--             <argument>-jar</argument> -->
+
+<!--             Copy allatori.jar to 'allatori' directory to use the commented line -->
+<!--             <argument>${basedir}/allatori/allatori.jar</argument> -->
+<!--             <argument>${basedir}/target/allatori.xml</argument> -->
+<!--           </arguments> -->
+<!--         </configuration> -->
+<!--       </plugin> -->
+            
+    </plugins>
+  </build>
+</project>

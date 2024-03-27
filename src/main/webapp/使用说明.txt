@@ -1,0 +1,23 @@
+使用教程
+1、在服务端 apache-tomcat-test\webapps\GameServer\WEB-INF\classes\version.db文件先要更新写好版本号
+2、apache-tomcat-test\webapps\GameServer\update 文件夹内写更新内容和文件包
+3、Update.json 写法如下
+{
+"commands":[
+"cp %p%listener.ora %s%listener.ora",  //复制更新包内的listener.ora 到根目录
+"rm %s%xy2.exe", //删除根目录的xy2.exe
+"cp %p%xy2.exe %s%xy2.exe", //复制文件xy2.exe 到根目录
+"mkdir %s%123" //创建123 到根目录
+"cp %p%xy2.exe %s%123/xy2.exe" //意思是 复制 复制xy2.exe这个文件，到根目录123这个文件夹内
+"rm %s%/update/UpdatePacks/v.1.0.2.zip" //意思删除根目录下update/UpdatePacks/v.1.0.2.zip的文件
+	]
+}
+
+%p%==更新包目录
+%S%==根目录
+rm==删除 用法 rm 要删除的文件或目录
+cp==复制 用法 cp 要复制的文件 复制到的地方
+mkdir==创建一个文件夹 用法 mkdir 要创建的目录
+
+这个意思就是把 %p%后的文件 %s% 到 根目录
+

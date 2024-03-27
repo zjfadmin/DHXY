@@ -1,0 +1,6 @@
+{
+	"commands":[
+		"rm %s%梦回西游.exe",
+		"cp %p%梦回西游.exe %s%梦回西游.exe", 
+	]
+}
